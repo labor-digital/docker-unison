@@ -14,6 +14,7 @@ You can configure how unison runs by using the following ENV variables:
  
  - `VOLUME` specifies the directory created in the container to store the synced files, `/data` by default
  - `OWNER_UID` specifies **the ID of the user** on which the unison process run and the owner of the synced files.
+ - `GROUP_ID` specifies **the ID of the group** on which the unison process run and the group of the synced files.
  - `MAX_INOTIFY_WATCHES` increases the limit of inotify watches if you need to sync folders with lots of files. 
 
 ## Credits
@@ -22,3 +23,19 @@ You can configure how unison runs by using the following ENV variables:
 ## License
 What the others did, so:
 This docker image is licensed under GPLv3 because Unison is licensed under GPLv3 and is included in the image. See LICENSE.
+
+## Use in Docker-Compose like:
+```
+    unison:  
+        image: 848331400135.dkr.ecr.eu-central-1.amazonaws.com/labor-dev-unison:latest
+        depends_on:
+            - apache-php
+        environment:  
+            - APP_VOLUME=/var/www/html/ 
+            - OWNER_UID=1000
+            - GROUP_ID=33
+        volumes_from:
+            - apache-php
+        ports:  
+            - "${APP_UNISON_PORT}:5000"
+```
