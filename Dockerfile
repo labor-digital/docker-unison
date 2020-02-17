@@ -1,12 +1,6 @@
-# TAG: 848331400135.dkr.ecr.eu-central-1.amazonaws.com/labor-dev-unison:latest
-# Build: docker build -t 848331400135.dkr.ecr.eu-central-1.amazonaws.com/labor-dev-unison:latest .
-# Push: docker push 848331400135.dkr.ecr.eu-central-1.amazonaws.com/labor-dev-unison:latest
 # Stolen from: https://github.com/EugenMayer/docker-image-unison
 
 FROM alpine:edge
-
-# Define author
-MAINTAINER LABOR digital <info@labor.digital>
 
 ARG UNISON_VERSION=2.48.4
 RUN apk add --no-cache build-base curl bash supervisor inotify-tools rsync ruby\

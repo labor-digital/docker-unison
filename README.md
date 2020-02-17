@@ -1,3 +1,8 @@
+# Docker Unison - With Group ID
+We extended the base image to also utilize unisons support for defining a sync GROUP_ID, because we had issues with file permissions.
+
+The package currently uses unison 2.48.4. 
+
 ## Usage
 
 This image is the unison-image for [docker-sync](https://github.com/EugenMayer/docker-sync) and published on [eugenmayer/unison](https://hub.docker.com/r/eugenmayer/unison/)

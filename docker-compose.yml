@@ -1,7 +1,0 @@
-version: '2'
-services:
-  unison:
-    build:
-      context: .
-    container_name: 'unison'
-    image: 'eugenmayer/unison'
