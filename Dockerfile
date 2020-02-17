@@ -2,6 +2,23 @@
 
 FROM alpine:edge
 
+ARG OCAML_VERSION=4.03.0
+
+RUN apk update \
+    && apk add --no-cache --virtual .build-deps build-base coreutils \
+	&& wget http://caml.inria.fr/pub/distrib/ocaml-${OCAML_VERSION:0:4}/ocaml-${OCAML_VERSION}.tar.gz \
+	&& tar xvf ocaml-${OCAML_VERSION}.tar.gz -C /tmp \
+	&& cd /tmp/ocaml-${OCAML_VERSION} \
+    && ./configure \
+    && make world \
+    && make opt \
+    && umask 022 \
+    && make install \
+    && make clean \
+    && apk del .build-deps  \
+	&& rm -rf /tmp/ocaml-${OCAML_VERSION} \
+	&& rm /ocaml-${OCAML_VERSION}.tar.gz
+
 ARG UNISON_VERSION=2.48.4
 RUN apk add --no-cache build-base curl bash supervisor inotify-tools rsync ruby\
     && apk add --update-cache --repository http://dl-4.alpinelinux.org/alpine/edge/testing/ ocaml \
